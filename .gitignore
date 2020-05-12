@@ -11,6 +11,7 @@
 
 # development
 /.vscode
+.idea/**
 
 # compressed
 *.7z
