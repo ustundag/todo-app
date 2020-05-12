@@ -20,7 +20,7 @@ export default class NaviComponent extends Component {
             <Nav className="ml-auto">
               <NavItem>
                 <NavLink
-                  href="https://github.com/ustundag"
+                  href="https://github.com/ustundag/todo-app"
                   style={{ color: "white", textDecoration: "none" }}
                 >
                   GitHub

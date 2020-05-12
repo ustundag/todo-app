@@ -36,21 +36,21 @@ export default class MainApp extends Component {
           </Row>
           <Row style={{ margin: 20 }}></Row>
           <Row>
-            <Col xs="3">
+            <Col xs="2">
               <CategoryComponent
                 currentCategory={this.state.currentCategory}
                 changeCategory={this.changeCategory}
                 info={categoryInfo}
               />
             </Col>
-            <Col xs="8">
+            <Col xs="9">
                   <ToDoListComponent
                     currentCategory={this.state.currentCategory}
                     info={todoInfo}
                   />
               </Col>
                 <Col xs="1">
-                <div style={{marginLeft:-200, marginTop:-5}}>
+                <div style={{marginLeft:-150, marginTop:-5}}>
                     <Button
                       color="success"
                       className="float-left"
