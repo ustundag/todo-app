@@ -81,6 +81,7 @@ local.properties
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
+*.iml
 
 # Generated files
 .idea/**/contentModel.xml
@@ -145,9 +146,6 @@ fabric.properties
 # modules.xml
 # .idea/misc.xml
 # *.ipr
-
-# Sonarlint plugin
-.idea/**/sonarlint/
 
 # SonarQube Plugin
 .idea/**/sonarIssues.xml
