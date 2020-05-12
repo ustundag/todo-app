@@ -1,15 +1,17 @@
-import React, { Component, Router, Route, Switch } from "react";
-import MainApp from './components/MainApp'
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import MainApp from "./components/MainApp";
+import AddTodoComponent from "./components/AddTodoComponent";
 
-class App extends Component {
+export default class App extends Component {
   render() {
     return (
-      <div className="MainApp">
-        {/*<Counter/>*/}
-        <MainApp />
-      </div>
+      <Router>
+        <Switch>
+          <Route exact path="/add-todo" component={AddTodoComponent} />
+          <Route exact path="/" component={MainApp} />
+        </Switch>
+      </Router>
     );
   }
 }
-
-export default App;

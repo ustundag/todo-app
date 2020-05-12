@@ -19,9 +19,9 @@ export default class ToDoList extends Component {
   render() {
     return (
       <div>
-        <h3>
+        <h4>
           {this.props.info.title} + {this.props.currentCategory}
-        </h3>
+        </h4>
         <div className="container">
           <Table striped>
             <thead>
@@ -54,11 +54,7 @@ export default class ToDoList extends Component {
               </tr>
             </tbody>
           </Table>
-          <div className="row">
-            <button className="btn btn-success" onClick={this.addTodoClicked}>
-              Add
-            </button>
-          </div>
+          
         </div>
       </div>
     );
