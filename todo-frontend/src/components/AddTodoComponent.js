@@ -1,32 +1,40 @@
 import React, { Component } from "react";
 import { Container, Row, Col } from "reactstrap";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import moment from "moment";
 import NaviComponent from "./NaviComponent";
+import TodoDataService from '../TodoDataService.js'
 
 export default class AddTodoComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
       id: this.props.match.params.id,
-      description: "",
+      description: null,
       deadline: moment(new Date()).format("YYYY-MM-DD"),
     };
-    this.onSubmit = this.onSubmit.bind(this);
+    this.onSubmit = this.onSubmit.bind(this)
   }
 
   onSubmit(values) {
-    let username = "anil";
-    let todo = {
-      id: this.state.id,
-      description: values.description,
-      deadline: values.deadline,
-    };
-    console.log(values);
+      console.log("onSubmit clicked")
+      let todo = {
+          id: this.state.id,
+          description: values.description,
+          deadline: values.deadline,
+          isCompleted: false
+      }
+      TodoDataService.addTodo(todo).then(() => this.props.history.push('/'));
   }
-
+  validate(values) {
+    let errors = {}
+    if (!values.description) {
+        errors.description = 'Please write a description!'
+    }
+    return errors
+  }
   render() {
-    let { id, description, deadline } = this.state;
+    let { description, deadline } = this.state;
     return (
       <div className="AddTodoComponent">
         <Container>
@@ -51,6 +59,8 @@ export default class AddTodoComponent extends Component {
               >
                 {(props) => (
                   <Form>
+                    <ErrorMessage name="description" component="div"
+                                  className="alert alert-warning" />
                     <fieldset className="form-group">
                       <label>Description</label>
                       <Field

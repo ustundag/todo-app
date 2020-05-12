@@ -9,22 +9,22 @@ export default class MainApp extends Component {
     console.log("constructor");
     super(props);
     this.state = {
-      currentCategory: "",
+      currentCategory: "All Categories",
       todos: [],
       message: null,
     };
-    this.addTodoClicked = this.addTodoClicked.bind(this);
+    this.addTodo = this.addTodo.bind(this);
   }
 
   changeCategory = (category) => {
     this.setState({ currentCategory: category.categoryName });
   };
-  addTodoClicked() {
+  addTodo() {
     this.props.history.push(`/add-todo`);
   }
 
   render() {
-    let todoInfo = { title: "To-Do List" };
+    let todoInfo = { title: "TODOs" };
     let categoryInfo = { title: "Categories" };
     return (
       <div className="MainApp">
@@ -43,29 +43,22 @@ export default class MainApp extends Component {
                 info={categoryInfo}
               />
             </Col>
-            <Col xs="9">
-              <Row>
-                <Col xs="12">
+            <Col xs="8">
                   <ToDoListComponent
                     currentCategory={this.state.currentCategory}
                     info={todoInfo}
                   />
-                </Col>
-              </Row>
-              <Row>
-                <Col xs="12">
-                  <div>
+              </Col>
+                <Col xs="1">
+                <div style={{marginLeft:-200, marginTop:-5}}>
                     <Button
                       color="success"
                       className="float-left"
-                      onClick={this.addTodoClicked}
-                    >
+                      onClick={this.addTodo}>
                       Add New
                     </Button>{" "}
                   </div>
                 </Col>
-              </Row>
-            </Col>
           </Row>
         </Container>
       </div>

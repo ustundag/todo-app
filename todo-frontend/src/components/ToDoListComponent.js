@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Table, Button } from "reactstrap";
+import TodoDataService from '../TodoDataService.js'
+import moment from "moment";
 
-export default class ToDoList extends Component {
+export default class ToDoListComponent extends Component {
   constructor(props) {
     console.log("ToDoList constructor");
     super(props);
@@ -9,18 +11,43 @@ export default class ToDoList extends Component {
       todos: [],
       message: null,
     };
-    this.addTodoClicked = this.addTodoClicked.bind(this);
+    this.deleteTodo      = this.deleteTodo.bind(this);
+    this.refreshTodoList = this.refreshTodoList.bind(this);
   }
 
-  addTodoClicked() {
-    this.props.history.push(`/todos/-1`);
+  componentWillUnmount() {
+    console.log("componentWillUnmount");
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log("shouldComponentUpdate");
+    console.log(nextProps);
+    console.log(nextState);
+    return true;
+  }
+  componentDidMount() {
+    console.log("componentDidMount");
+    this.refreshTodoList();
+    console.log(this.state);
+  }
+  refreshTodoList() {
+    TodoDataService.retrieveAllTodos().then((response) => {
+      console.log('[ToDoListComponent] refreshTodoList');
+      console.log(response);
+      this.setState({ todos: response.data });
+    });
+  }
+  deleteTodo(id) {
+    TodoDataService.deleteTodo(id).then((response) => {
+      this.setState({ message: 'Delete of todo ${id} Successful'});
+      this.refreshTodoList();
+    });
   }
 
   render() {
     return (
       <div>
         <h4>
-          {this.props.info.title} + {this.props.currentCategory}
+          {this.props.info.title} in {this.props.currentCategory}
         </h4>
         <div className="container">
           <Table striped>
@@ -34,27 +61,22 @@ export default class ToDoList extends Component {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>
-                  <Button color="danger">remove</Button>{" "}
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td>
-                  <Button color="danger">remove</Button>{" "}
-                </td>
-              </tr>
+              {this.state.todos.map((todo) => (
+                <tr key={todo.id}>
+                  <th scope="row">{todo.id}</th>
+                  <td>{todo.description}</td>
+                  <td>{moment(todo.deadline).format("YYYY-MM-DD")}</td>
+                  <td>{todo.completed.toString()}</td>
+                  <td>
+                    <Button className="btn btn-danger" 
+                            onClick={() => this.deleteTodo(todo.id)}>
+                            Remove
+                    </Button>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </Table>
-          
         </div>
       </div>
     );
