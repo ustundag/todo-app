@@ -2,8 +2,8 @@
 
 Yet another TODO app with naive functionalities such as list, add, delete.
 
-To run the whole containers;
-```
+```bash
+# Run all containers
 docker-compose up
 ```
 
@@ -19,8 +19,8 @@ Add Jib maven plugin to the `pom.xml` like this [setup](https://github.com/Googl
 
 Since Jib automatically pushes the created image to docker hub, user credentials are required to login into the docker registry.
 Simply insert your credentials surrounded with server tags into the `settings.xml` file as [shown here](https://github.com/GoogleContainerTools/jib/tree/master/jib-maven-plugin#using-maven-settings).
-To find out where the file is located, any maven command with the option -X can be run; i.e. `mvn -X install`.
-Then search for `settings.xml` keyword in debug logs and update the global or local file with server tag as [shown here](https://github.com/GoogleContainerTools/jib/tree/master/jib-maven-plugin#using-docker-hub-registry).
+To find out where the file is located, any maven command with the option -X can be beneficial; i.e. `mvn -X install`.
+Then search for `settings.xml` keyword in debug logs and update the global or local file. After that, edit the repository configuration as [shown here](https://github.com/GoogleContainerTools/jib/tree/master/jib-maven-plugin#using-docker-hub-registry).
 
 Finally, run the command below.
 ```
@@ -31,9 +31,11 @@ mvn compile jib:build
 To create an image of the frontend and push it to the docker hub, run the commands below in the directory of the `todo-frontend` folder.
 
 ```
-docker build -t [IMAGE_NAME] .
+docker build -t [YOUR_IMAGE_NAME] .
 docker login
-docker push [IMAGE_NAME]
+...
+docker push [YOUR_IMAGE_NAME]
+...
 docker logout
 ```
 
