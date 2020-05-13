@@ -1,0 +1,43 @@
+version: '3.7'
+
+services:
+  todo-app-frontend:
+    image: ustundag/todo-app-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - todo-app-backend
+    networks:
+      - todo-app-network
+
+  todo-app-backend:
+    image: ustundag/todo-app-backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - todo-db
+    environment:
+      TODO_DB_HOSTNAME: todo-db
+      TODO_DB_PORT: 5432
+      TODO_DB_NAME: postgres
+    networks:
+      - todo-app-network
+
+  todo-db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - postgresql-db-volume:/var/lib/postgresql
+    networks:
+      - todo-app-network
+
+volumes:
+  postgresql-db-volume:
+
+networks:
+  todo-app-network:
