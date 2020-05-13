@@ -37,7 +37,7 @@ docker push [YOUR_IMAGE_NAME]
 docker logout
 ```
 
-## Future Work
+## Future Works
 - [ ] Unit tests with h2 db.
 - [ ] Add user login/logout services with [Spring Security](https://spring.io/projects/spring-security) and [JWT](https://jwt.io/).
 - [ ] Filtering by categories.
