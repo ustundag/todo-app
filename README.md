@@ -33,9 +33,7 @@ To create an image of the frontend and push it to the docker hub, run the comman
 ```
 docker build -t [YOUR_IMAGE_NAME] .
 docker login
-...
 docker push [YOUR_IMAGE_NAME]
-...
 docker logout
 ```
 
