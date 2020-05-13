@@ -29,7 +29,7 @@ export default class AddTodoComponent extends Component {
   validate(values) {
     let errors = {}
     if (!values.description) {
-        errors.description = 'Please write a description!'
+        errors.description = 'Description can not be empty!'
     }
     return errors
   }
