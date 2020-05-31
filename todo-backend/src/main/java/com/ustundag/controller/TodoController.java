@@ -1,8 +1,8 @@
 package com.ustundag.controller;
 
 import com.ustundag.service.TodoService;
-import com.ustundag.entity.Todo;
 import com.ustundag.service.dto.TodoDTO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,11 +12,13 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/v1/todo")
 public class TodoController {
 
     //@Autowired
     //private TodoRepository todoRepository;
+
     @Autowired
     private TodoService todoService;
 

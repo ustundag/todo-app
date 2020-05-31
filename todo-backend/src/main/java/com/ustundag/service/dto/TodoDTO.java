@@ -8,13 +8,16 @@ import java.util.Date;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @EqualsAndHashCode(of = {"id"})
 @ToString
 public class TodoDTO {
     private Long id;
-    @NotNull
     private String description;
     private Date deadline;
+    private boolean isCompleted;
+    private URI uri;
 
     public TodoDTO(Long id, @NotNull String description, Date deadline, boolean isCompleted) {
         this.id = id;
@@ -22,7 +25,4 @@ public class TodoDTO {
         this.deadline = deadline;
         this.isCompleted = isCompleted;
     }
-
-    private boolean isCompleted;
-    private URI uri;
 }
